@@ -26,6 +26,7 @@ onRecvCompleteListener {
 			mThreadPoolExcutor =(ThreadPoolExecutor)Executors.newFixedThreadPool(10);
 			mAcceptRunnable = new AcceptRunnable(mServerSocket , this);
 			mClientHash = new HashMap<>();
+			mThreadPoolExcutor.execute(mAcceptRunnable);
 		} catch ( IOException e ) {
 			e.printStackTrace();	
 		}
@@ -42,6 +43,9 @@ onRecvCompleteListener {
 	
 	@Override
 	public void onAccept ( Socket socket ) {
-		
+		Client client = new Client(socket , this , this );
+		mClientHash.put(client.hashCode() , client );
+		System.out.println("Hello : " + client.hashCode());
+		mThreadPoolExcutor.execute(mAcceptRunnable);
 	}
 }
