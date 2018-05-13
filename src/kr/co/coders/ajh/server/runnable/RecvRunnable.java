@@ -19,6 +19,7 @@ public class RecvRunnable implements Runnable {
 						 int hashCode ) {
 		mInputStream = inputStream;
 		mRecvCompleteListener = recvCompleteListener;
+		mClosedSocketListener = closedSocketListener;
 		mHashCode = hashCode;
 	}
 	

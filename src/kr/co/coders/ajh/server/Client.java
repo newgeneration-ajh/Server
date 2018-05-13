@@ -7,6 +7,7 @@ import kr.co.coders.ajh.server.runnable.SendRunnable;
 
 import kr.co.coders.ajh.server.listener.onRecvCompleteListener;
 import kr.co.coders.ajh.server.listener.onClosedSocketListener;
+import kr.co.coders.ajh.server.listener.onSendCompleteListener;
 
 public class Client {
 	private Socket mSocket = null;
@@ -14,11 +15,12 @@ public class Client {
 	private SendRunnable mSendRunnable = null;
 	
 	public Client ( Socket socket , onRecvCompleteListener recvCompleteListener ,
+				    onSendCompleteListener sendCompleteListener ,
 				    onClosedSocketListener closedSocketListener ) {
 		mSocket = socket;
 		try {
 			mRecvRunnable = new RecvRunnable( socket.getInputStream() , recvCompleteListener , 
-											  closedSocketListener , this.hashCode() );
+											 closedSocketListener , this.hashCode() );
 			mSendRunnable = new SendRunnable ( socket.getOutputStream() );
 		} catch ( IOException e ) {
 			e.printStackTrace();

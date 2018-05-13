@@ -11,10 +11,11 @@ import kr.co.coders.ajh.server.runnable.AcceptRunnable;
 import kr.co.coders.ajh.server.listener.onAcceptListener;
 import kr.co.coders.ajh.server.listener.onClosedSocketListener;
 import kr.co.coders.ajh.server.listener.onRecvCompleteListener;
+import kr.co.coders.ajh.server.listener.onSendCompleteListener;
 import kr.co.coders.ajh.server.memory_pool.MemoryPool;
 
 public class Server implements onAcceptListener , onClosedSocketListener , 
-onRecvCompleteListener {
+onRecvCompleteListener , onSendCompleteListener {
 	
 	private ThreadPoolExecutor mThreadPoolExcutor = null;
 	private ServerSocket mServerSocket = null;
@@ -32,23 +33,27 @@ onRecvCompleteListener {
 			e.printStackTrace();	
 		}
 	}
-
+	
 	@Override
-	public void onRecvComplete ( byte[] data , int size , int from ) {
-		System.out.println("Hello Message From : " + from );
-		System.out.println(new String(data,0,size) + " " + data );
-		MemoryPool.getInstance().returnMemory(data);
+	public void onSendComplete ( byte[] datas ) {
+		MemoryPool.getInstance().returnMemory(datas);
+	}
+	
+	@Override
+	public void onRecvComplete ( byte[] datas , int size , int from ) {
+		MemoryPool.getInstance().returnMemory(datas);
 		mThreadPoolExcutor.submit( mClientHash.get(from).getRecvRunnable());
 	}
 	
 	@Override
 	public void onClosedSocket ( int hashCode ) {
+		System.out.println("bye : " + hashCode);
 		mClientHash.remove(hashCode);
 	}
 	
 	@Override
 	public void onAccept ( Socket socket ) {
-		Client client = new Client(socket , this , this );
+		Client client = new Client(socket , this , this , this );
 		mClientHash.put(client.hashCode() , client );
 		System.out.println("Hello : " + client.hashCode());
 		mThreadPoolExcutor.submit(mAcceptRunnable);
