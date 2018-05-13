@@ -15,7 +15,7 @@ public class RecvRunnable implements Runnable {
 	
 	public RecvRunnable ( InputStream inputStream , 
 						 onRecvCompleteListener recvCompleteListener , 
-						 
+						 onClosedSocketListener closedSocketListener ,
 						 int hashCode ) {
 		mInputStream = inputStream;
 		mRecvCompleteListener = recvCompleteListener;
