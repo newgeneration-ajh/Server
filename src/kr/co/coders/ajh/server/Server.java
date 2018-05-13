@@ -34,6 +34,13 @@ onRecvCompleteListener , onSendCompleteListener {
 		}
 	}
 	
+	public void sendAllClients( byte[] datas , int size  ) {
+		mClientHash.forEach( ( k,v) -> {
+			v.getSendRunnable().setData(datas,size);
+			mThreadPoolExcutor.submit(v.getSendRunnable());
+		});
+	}
+	
 	@Override
 	public void onSendComplete ( byte[] datas ) {
 		MemoryPool.getInstance().returnMemory(datas);

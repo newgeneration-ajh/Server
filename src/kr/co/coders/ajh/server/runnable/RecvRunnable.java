@@ -41,14 +41,14 @@ public class RecvRunnable implements Runnable {
 					recvDataSize += tmpSize;
 				}
 				if ( mRecvCompleteListener != null ) {
-					mRecvCompleteListener.onRecvComplete(datas, recvDataSize , mHashCode );
+					mRecvCompleteListener.onRecvComplete(datas, recvDataSize , this.mHashCode );
 				}
 				else {
 					System.out.println("Recv Complete Listener null!!");
 				}
 			}
 			else {
-				mClosedSocketListener.onClosedSocket(this.hashCode());
+				mClosedSocketListener.onClosedSocket(mHashCode);
 			}
 		} catch ( IOException e ) { 
 			e.printStackTrace();

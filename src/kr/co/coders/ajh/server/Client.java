@@ -20,8 +20,8 @@ public class Client {
 		mSocket = socket;
 		try {
 			mRecvRunnable = new RecvRunnable( socket.getInputStream() , recvCompleteListener , 
-											 closedSocketListener , this.hashCode() );
-			mSendRunnable = new SendRunnable ( socket.getOutputStream() );
+											 closedSocketListener , mSocket.hashCode() );
+			mSendRunnable = new SendRunnable ( socket.getOutputStream() , sendCompleteListener );
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
