@@ -51,6 +51,7 @@ public class RecvRunnable implements Runnable {
 				mClosedSocketListener.onClosedSocket(mHashCode);
 			}
 		} catch ( IOException e ) { 
+			mClosedSocketListener.onClosedSocket(mHashCode);
 			e.printStackTrace();
 		}
 	}
