@@ -3,19 +3,19 @@ package kr.co.coders.ajh.server.runnable;
 import java.io.InputStream;
 import java.io.IOException;
 
-import kr.co.coders.ajh.server.listener.onRecvCompleteListener;
-import kr.co.coders.ajh.server.listener.onClosedSocketListener;
+import kr.co.coders.ajh.server.listener.IRecvCompleteListener;
+import kr.co.coders.ajh.server.listener.IClosedSocketListener;
 import kr.co.coders.ajh.server.memory_pool.MemoryPool;
 
 public class RecvRunnable implements Runnable {
 	private InputStream mInputStream = null;
-	private onRecvCompleteListener mRecvCompleteListener = null;
-	private onClosedSocketListener mClosedSocketListener = null;
+	private IRecvCompleteListener mRecvCompleteListener = null;
+	private IClosedSocketListener mClosedSocketListener = null;
 	private int mHashCode = 0;
 	
 	public RecvRunnable ( InputStream inputStream , 
-						 onRecvCompleteListener recvCompleteListener , 
-						 onClosedSocketListener closedSocketListener ,
+						 IRecvCompleteListener recvCompleteListener , 
+						 IClosedSocketListener closedSocketListener ,
 						 int hashCode ) {
 		mInputStream = inputStream;
 		mRecvCompleteListener = recvCompleteListener;

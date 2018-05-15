@@ -3,17 +3,17 @@ package kr.co.coders.ajh.server.runnable;
 import java.io.OutputStream;
 import java.io.IOException;
 
-import kr.co.coders.ajh.server.listener.onSendCompleteListener;
+import kr.co.coders.ajh.server.listener.ISendCompleteListener;
 
 public class SendRunnable implements Runnable {
 	
 	private OutputStream mOutputStream = null;
-	private onSendCompleteListener mSendCompleteListener = null;
+	private ISendCompleteListener mSendCompleteListener = null;
 	private byte[] mDatas = null;
 	private int mDataSize = 0;
 	
 	
-	public SendRunnable ( OutputStream outputStream , onSendCompleteListener sendCompleteListener ) {
+	public SendRunnable ( OutputStream outputStream , ISendCompleteListener sendCompleteListener ) {
 		mOutputStream = outputStream;
 		mSendCompleteListener = sendCompleteListener;
 	}

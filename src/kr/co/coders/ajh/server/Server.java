@@ -8,14 +8,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import kr.co.coders.ajh.server.runnable.AcceptRunnable;
-import kr.co.coders.ajh.server.listener.onAcceptListener;
-import kr.co.coders.ajh.server.listener.onClosedSocketListener;
-import kr.co.coders.ajh.server.listener.onRecvCompleteListener;
-import kr.co.coders.ajh.server.listener.onSendCompleteListener;
+import kr.co.coders.ajh.server.listener.IAcceptListener;
+import kr.co.coders.ajh.server.listener.IClosedSocketListener;
+import kr.co.coders.ajh.server.listener.IRecvCompleteListener;
+import kr.co.coders.ajh.server.listener.ISendCompleteListener;
 import kr.co.coders.ajh.server.memory_pool.MemoryPool;
 
-public class Server implements onAcceptListener , onClosedSocketListener , 
-onRecvCompleteListener , onSendCompleteListener {
+public class Server implements IAcceptListener , IClosedSocketListener , 
+IRecvCompleteListener , ISendCompleteListener {
 	
 	private ThreadPoolExecutor mThreadPoolExcutor = null;
 	private ServerSocket mServerSocket = null;

@@ -4,14 +4,14 @@ import java.net.Socket;
 import java.net.ServerSocket;
 import java.io.IOException;
 
-import kr.co.coders.ajh.server.listener.onAcceptListener;
+import kr.co.coders.ajh.server.listener.IAcceptListener;
 
 public class AcceptRunnable implements Runnable {
 	private ServerSocket mServerSocket = null;
-	private onAcceptListener mAcceptListener = null;
+	private IAcceptListener mAcceptListener = null;
 	
 	public AcceptRunnable ( ServerSocket serverSocket , 
-						    onAcceptListener acceptListener ) {
+						    IAcceptListener acceptListener ) {
 		mServerSocket = serverSocket;
 		mAcceptListener = acceptListener;
 	}
