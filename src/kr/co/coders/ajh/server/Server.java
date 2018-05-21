@@ -41,6 +41,21 @@ IRecvCompleteListener , ISendCompleteListener {
 		});
 	}
 	
+	public void sendAllClientsWithoutMe( byte[] datas , int size , int from ) {
+		mClientHash.forEach( (k,v) -> {
+			if ( k != from ) {
+				v.getSendRunnable().setData(datas,size);
+				mThreadPoolExcutor.submit(v.getSendRunnable());
+			}
+		});
+	}
+	
+	public void sendEcho( byte[] datas , int size , int from ) {
+		Client client = mClientHash.get(from);
+		client.getSendRunnable().setData(datas,size);
+		mThreadPoolExcutor.submit(client.getRecvRunnable());
+	}
+	
 	@Override
 	public void onSendComplete ( byte[] datas ) {
 		MemoryPool.getInstance().returnMemory(datas);
